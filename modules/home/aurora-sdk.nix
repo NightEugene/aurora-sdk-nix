@@ -39,7 +39,11 @@ in
 {
   options.programs.aurora-sdk = {
     enable = lib.mkEnableOption "Aurora SDK";
-    package = lib.mkPackageOption pkgs "aurora-sdk" { default = aurora-sdk; };
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = aurora-sdk;
+      description = "The Aurora SDK package to use.";
+    };
   };
 
   config = lib.mkIf config.programs.aurora-sdk.enable {
