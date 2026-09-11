@@ -123,6 +123,16 @@ let
     # Патчим скрипты SDK при каждом запуске — на случай переустановки
     ${aurora-sdk-patch-tools}
 
+    # На NixOS/Wayland SDL создаёт окно эмулятора в ландшафтной ориентации
+    # (по EDID 720x400), хотя framebuffer портретный. Принудительно
+    # используем X11 backend — тогда окно создаётся с правильным размером.
+    export SDL_VIDEODRIVER=x11
+
+    # На NixOS OpenGL-драйверы лежат в /run/opengl-driver, а не в /usr/lib.
+    # Без этого bundled QEMU не находит DRI-драйверы и рендерит неправильно.
+    export LD_LIBRARY_PATH="/run/opengl-driver/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    export LIBGL_DRIVERS_PATH="/run/opengl-driver/lib/dri"
+
     export QT_QPA_PLATFORM=xcb
     exec "$AURORA_SDK_DIR/bin/qtcreator" "$@"
   '';
