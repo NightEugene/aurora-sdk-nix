@@ -12,7 +12,7 @@ let
   fhsCommon = import ./fhs-common.nix { inherit pkgs; };
 
   version = "5.2.1.200";
-  installerName = "AuroraSDK-${version}-BT-release-linux-64-offline-26.06.17-08.08.07.run";
+  installerName = "AuroraSDK-${version}-BT-release-linux-64-offline-26.07.01-18.17.50.run";
 
   # Qt Creator's Aurora plugin может запускать apptool/qmake с PATH,
   # в котором отсутствуют базовые утилиты (hostname, dirname, docker и т.д.).
@@ -51,7 +51,7 @@ let
 
     src = fetchurl {
       url = "https://sdk-repo.omprussia.ru/sdk/installers/5.2.1/${version}-release/AuroraSDK-BT/${installerName}";
-      sha256 = "1242k1mr1786k2190yvdfyl5ap7f1s057d1j3mjqbpcs1qvhvbxw";
+      sha256 = "sha256-W72JpdmArwc8h2FFqRAmVuN/5/HxFyiezzRpmc/JEdI=";
     };
 
     installPhase = ''
